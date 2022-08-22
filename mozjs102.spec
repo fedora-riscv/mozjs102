@@ -18,7 +18,7 @@
 %endif
 
 Name:           mozjs%{major}
-Version:        102.1.0
+Version:        102.2.0
 Release:        1%{?dist}
 Summary:        SpiderMonkey JavaScript library
 
@@ -44,9 +44,6 @@ Patch13:        tests-Use-native-TemporaryDirectory.patch
 Patch14:        init_patch.patch
 Patch15:        remove-sloppy-m4-detection-from-bundled-autoconf.patch
 Patch16:        0001-Python-Build-Use-r-instead-of-rU-file-read-modes.patch
-# These two should get uplifted into the next esr
-Patch17:        D152556.diff
-Patch18:        D152549.diff
 
 # TODO: Check with mozilla for cause of these fails and re-enable spidermonkey compile time checks if needed
 Patch20:        spidermonkey_checks_disable.patch
@@ -229,5 +226,8 @@ ln -s libmozjs-%{major}.so.0 %{buildroot}%{_libdir}/libmozjs-%{major}.so
 %{_includedir}/mozjs-%{major}/
 
 %changelog
+* Mon Aug 22 2022 Frantisek Zatloukal <fzatlouk@redhat.com> - 102.2.0-1
+- mozjs102-102.2.0
+
 * Wed Jul 27 2022 Frantisek Zatloukal <fzatlouk@redhat.com> - 102.1.0-1
 - Initial mozjs102 package based on mozjs91
