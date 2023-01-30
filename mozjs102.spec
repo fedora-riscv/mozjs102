@@ -19,7 +19,7 @@
 
 Name:           mozjs%{major}
 Version:        102.7.0
-Release:        1%{?dist}
+Release:        1.rv64%{?dist}
 Summary:        SpiderMonkey JavaScript library
 
 License:        MPL-2.0 AND Apache-2.0 AND BSD-3-Clause AND BSD-2-Clause AND MIT AND GPL-3.0-or-later
@@ -50,6 +50,9 @@ Patch20:        spidermonkey_checks_disable.patch
 
 # s390x/ppc64 fixes
 Patch21:        0001-Skip-failing-tests-on-ppc64-and-s390x.patch
+
+# riscv64 fix
+Patch30:        tests-skip-some-tests-on-rv64.patch
 
 BuildRequires:  cargo
 BuildRequires:  ccache
@@ -226,6 +229,9 @@ ln -s libmozjs-%{major}.so.0 %{buildroot}%{_libdir}/libmozjs-%{major}.so
 %{_includedir}/mozjs-%{major}/
 
 %changelog
+* Mon Jan 30 2023 Liu Yang <Yang.Liu.sn@gmail.com> - 102.7.0-1.rv64
+- Add riscv64 fix from https://github.com/felixonmars/archriscv-packages/commit/5ef0b7d167dd646981e36843056b7b0559e23731
+
 * Mon Jan 16 2023 Frantisek Zatloukal <fzatlouk@redhat.com> - 102.7.0-1
 - mozjs102-102.7.0 (fixes RHBZ#2161250)
 
