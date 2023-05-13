@@ -12,13 +12,18 @@
 %define _lto_cflags %{nil}
 %endif
 
+# Clean pushed RUSTFLAGS to make it buildable
+%if %defined build_rustflags
+%global build_rustflags %{nil}
+%endif
+
 # Big endian platforms
 %ifarch ppc ppc64 s390 s390x
 %global big_endian 1
 %endif
 
 Name:           mozjs%{major}
-Version:        102.7.0
+Version:        102.9.0
 Release:        1.rv64%{?dist}
 Summary:        SpiderMonkey JavaScript library
 
@@ -43,7 +48,6 @@ Patch13:        tests-Use-native-TemporaryDirectory.patch
 # Build fixes
 Patch14:        init_patch.patch
 Patch15:        remove-sloppy-m4-detection-from-bundled-autoconf.patch
-Patch16:        0001-Python-Build-Use-r-instead-of-rU-file-read-modes.patch
 
 # TODO: Check with mozilla for cause of these fails and re-enable spidermonkey compile time checks if needed
 Patch20:        spidermonkey_checks_disable.patch
@@ -229,8 +233,17 @@ ln -s libmozjs-%{major}.so.0 %{buildroot}%{_libdir}/libmozjs-%{major}.so
 %{_includedir}/mozjs-%{major}/
 
 %changelog
-* Mon Jan 30 2023 Liu Yang <Yang.Liu.sn@gmail.com> - 102.7.0-1.rv64
+* Sat May 13 2023 Liu Yang <Yang.Liu.sn@gmail.com> - 102.9.0-1.rv64
 - Add riscv64 fix from https://github.com/felixonmars/archriscv-packages/commit/5ef0b7d167dd646981e36843056b7b0559e23731
+
+* Mon Mar 13 2023 Frantisek Zatloukal <fzatlouk@redhat.com> - 102.9.0-1
+- mozjs102-102.9.0 (fixes RHBZ#2177727)
+
+* Fri Feb 17 2023 Frantisek Zatloukal <fzatlouk@redhat.com> - 102.8.0-1
+- mozjs102-102.8.0 (fixes RHBZ#2169721)
+
+* Thu Jan 19 2023 Fedora Release Engineering <releng@fedoraproject.org> - 102.7.0-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_38_Mass_Rebuild
 
 * Mon Jan 16 2023 Frantisek Zatloukal <fzatlouk@redhat.com> - 102.7.0-1
 - mozjs102-102.7.0 (fixes RHBZ#2161250)
