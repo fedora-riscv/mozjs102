@@ -12,11 +12,6 @@
 %define _lto_cflags %{nil}
 %endif
 
-# Clean pushed RUSTFLAGS to make it buildable
-%if %defined build_rustflags
-%global build_rustflags %{nil}
-%endif
-
 # Big endian platforms
 %ifarch ppc ppc64 s390 s390x
 %global big_endian 1
@@ -48,6 +43,11 @@ Patch13:        tests-Use-native-TemporaryDirectory.patch
 # Build fixes
 Patch14:        init_patch.patch
 Patch15:        remove-sloppy-m4-detection-from-bundled-autoconf.patch
+
+# tentative patch for RUSTFLAGS parsing issue, taken from firefox package:
+# https://bugzilla.redhat.com/show_bug.cgi?id=2184743
+# https://bugzilla.mozilla.org/show_bug.cgi?id=1474486
+Patch16:        firefox-112.0-commasplit.patch
 
 # TODO: Check with mozilla for cause of these fails and re-enable spidermonkey compile time checks if needed
 Patch20:        spidermonkey_checks_disable.patch
